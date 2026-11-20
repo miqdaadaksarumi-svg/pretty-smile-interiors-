@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PrettySmile Design | Interior Design, Lagos</title>
+<meta name="description" content="PrettySmile Design creates beautiful, functional and timeless spaces for residential and commercial clients in Lagos and beyond.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f0e6;
+    --sand: #eadcc6;
+    --peach: #e9b9a0;
+    --blush: #f3d9cc;
+    --gold: #b98b3e;
+    --gold-soft: #e1b874;
+    --olive: #5d6b4a;
+    --espresso: #2a1d15;
+    --brown: #6b4a36;
+    --text: #2a1d15;
+    --muted: #6d5a4b;
+    --serif: "Gilda Display", Georgia, serif;
+    --sans: "Instrument Sans", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body { font-family: var(--sans); color: var(--text); background: var(--cream); line-height: 1.7; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+
+  /* ---------- LOGO ---------- */
+  .logo { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
+  .logo svg { width: 46px; height: 46px; flex-shrink: 0; }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .logo-name { font-family: var(--serif); font-size: 1.55rem; font-weight: 400; letter-spacing: .01em; }
+  .logo-name em { font-style: normal; color: var(--gold); font-weight: 400; }
+  .logo-sub { font-size: .5rem; letter-spacing: .42em; font-family: var(--sans); font-weight: 500; text-transform: uppercase; margin-top: .35rem; opacity: .75; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed; inset: 0 0 auto; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .9rem 6vw; background: rgba(42,29,21,.94); color: var(--cream);
+    backdrop-filter: blur(6px); border-bottom: 1px solid rgba(225,184,116,.25);
+  }
+  nav ul { display: flex; gap: 1.8rem; list-style: none; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+  nav ul a { text-decoration: none; opacity: .88; transition: color .2s; }
+  nav ul a:hover { color: var(--gold-soft); }
+  .menu-btn {
+    display: none; background: none; border: 1px solid var(--gold-soft); color: var(--cream);
+    width: 44px; height: 44px; cursor: pointer; border-radius: 50%;
+    flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  }
+  .menu-btn span { display: block; width: 20px; height: 2px; background: var(--gold-soft); transition: transform .3s, opacity .3s; }
+  .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; padding: 8rem 6vw 5rem; color: var(--cream);
+    background:
+      radial-gradient(circle at 80% 20%, rgba(233,185,160,.35), transparent 45%),
+      linear-gradient(115deg, rgba(42,29,21,.92) 10%, rgba(107,74,54,.55) 60%, rgba(93,107,74,.45) 100%),
+      url("images/hero.jpg") center/cover, linear-gradient(135deg, #6b4a36, #2a1d15);
+  }
+  .hero-inner { max-width: 660px; }
+  .eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 1.1rem; }
+  .hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.8rem, 7vw, 5.2rem); line-height: 1.02; margin-bottom: 1.4rem; }
+  .hero h1 em { color: var(--peach); }
+  .hero p { font-size: 1.05rem; opacity: .92; margin-bottom: 2.2rem; max-width: 540px; }
+
+  .btn {
+    display: inline-block; padding: .95rem 2.1rem; border: 1px solid var(--gold-soft);
+    text-decoration: none; font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    transition: background .3s, color .3s, transform .3s, box-shadow .3s; cursor: pointer; background: none; color: inherit; border-radius: 999px;
+  }
+  .btn.solid { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); border-color: transparent; color: var(--espresso); margin-right: .8rem; }
+  .btn:hover { background: var(--peach); border-color: var(--peach); color: var(--espresso); transform: translateY(-2px); box-shadow: 0 10px 24px -10px rgba(42,29,21,.5); }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 6rem 6vw; }
+  .section-head { text-align: center; margin-bottom: 3.5rem; }
+  .section-head .eyebrow { color: var(--gold); }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.2rem, 4.5vw, 3.3rem); line-height: 1.12; }
+  h2 em, .hero h1 em { font-style: normal; color: var(--gold); }
+
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .about p { color: var(--muted); margin-bottom: 1rem; }
+  .about-img {
+    aspect-ratio: 4/5; border-radius: 200px 200px 32px 32px; position: relative; overflow: hidden;
+    background: linear-gradient(160deg, var(--peach), var(--gold) 55%, var(--olive));
+  }
+  .about-img::after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(255,255,255,.55); border-radius: inherit; }
+
+  /* ---------- SERVICES ---------- */
+  .services { background: linear-gradient(180deg, var(--sand), var(--blush)); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem; max-width: 1100px; margin: 0 auto; }
+  .card { background: var(--cream); padding: 2rem 1.6rem; border-top: 3px solid var(--gold); border-radius: 22px; box-shadow: 0 10px 30px -18px rgba(107,74,54,.5); transition: transform .4s ease, box-shadow .4s ease; }
+  .card:hover { transform: translateY(-4px); }
+  .card h3 { font-family: var(--serif); font-weight: 400; font-size: 1.4rem; margin-bottom: .5rem; color: var(--brown); }
+  .card p { color: var(--muted); font-size: .92rem; }
+
+  /* ---------- GALLERY ---------- */
+  .gallery { background: var(--cream); }
+  .filters { display: flex; justify-content: center; flex-wrap: wrap; gap: .6rem; margin-bottom: 2.5rem; }
+  .filter {
+    background: none; border: 1px solid var(--peach); color: var(--brown); padding: .55rem 1.2rem; border-radius: 999px;
+    font: inherit; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; transition: all .25s;
+  }
+  .filter:hover, .filter.active { background: var(--olive); border-color: var(--olive); color: var(--cream); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; max-width: 1200px; margin: 0 auto; }
+  .tile {
+    position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: 24px; cursor: pointer;
+    background: linear-gradient(145deg, var(--peach), var(--brown)); transition: transform .4s;
+  }
+  .tile:nth-child(3n+2) { background: linear-gradient(145deg, var(--gold-soft), var(--olive)); }
+  .tile:nth-child(3n) { background: linear-gradient(145deg, var(--blush), var(--gold)); }
+  .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .tile-cap {
+    position: absolute; inset: auto 0 0; padding: 1.4rem 1rem 1rem; color: var(--cream);
+    background: linear-gradient(transparent, rgba(42,29,21,.85)); font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
+  }
+  .tile-cap small { display: block; font-family: var(--sans); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-soft); }
+  .tile:hover { transform: scale(1.02); }
+  .tile.hide { display: none; }
+  .gallery-note { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 2rem; }
+
+  /* ---------- MISSION ---------- */
+  .mvo { background: linear-gradient(160deg, var(--espresso), var(--brown)); color: var(--cream); }
+  .mvo .eyebrow { color: var(--peach); }
+  .mvo h2 em { color: var(--gold-soft); }
+  .mvo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; max-width: 1100px; margin: 0 auto; }
+  .mvo h3 { font-family: var(--serif); font-size: 1.8rem; color: var(--gold-soft); margin-bottom: .8rem; font-weight: 400; }
+  .mvo p, .mvo li { opacity: .9; font-size: .95rem; }
+  .mvo ul { list-style: none; }
+  .mvo li { padding: .45rem 0 .45rem 1.3rem; position: relative; }
+  .mvo li::before { content: "◆"; position: absolute; left: 0; color: var(--peach); font-size: .6rem; top: .8rem; }
+
+  /* ---------- WHY ---------- */
+  .why { background: var(--blush); }
+  .why ul { list-style: none; max-width: 680px; margin: 0 auto; columns: 2; column-gap: 2rem; }
+  .why li { padding: .8rem 0; border-bottom: 1px solid var(--peach); font-size: .98rem; break-inside: avoid; }
+  .why li::before { content: "✦ "; color: var(--gold); }
+
+  /* ---------- CONTACT ---------- */
+  .contact { background: var(--sand); }
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3.5rem; max-width: 1000px; margin: 0 auto; }
+  .contact-info p { margin-bottom: 1.3rem; color: var(--muted); }
+  .contact-info strong { display: block; color: var(--olive); font-weight: 700; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; }
+  .contact-info a { color: var(--brown); }
+  form { display: grid; gap: 1rem; background: var(--cream); padding: 2.2rem; border-top: 3px solid var(--peach); border-radius: 28px; }
+  input, select, textarea {
+    font: inherit; font-size: .95rem; padding: .85rem 1.1rem; border: 1px solid #d6c4a8; border-radius: 14px;
+    background: #fffdf8; color: var(--text); width: 100%;
+  }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--gold-soft); border-color: transparent; }
+  textarea { min-height: 120px; resize: vertical; }
+  form .btn { cursor: pointer; border: none; text-align: center; }
+
+  footer { background: var(--espresso); color: var(--cream); text-align: center; padding: 2.8rem 6vw; font-size: .85rem; border-radius: 48px 48px 0 0; }
+  footer .logo { justify-content: center; margin-bottom: .8rem; }
+  footer p { opacity: .75; }
+
+  /* ---------- FLOATING ICONS ---------- */
+  .float-wrap { position: fixed; right: 20px; bottom: 20px; z-index: 60; display: flex; flex-direction: column; gap: 12px; }
+  .float {
+    width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 22px rgba(42,29,21,.35); transition: transform .25s; color: #fff; text-decoration: none; animation: ring 2.4s infinite;
+  }
+  .float:hover { transform: scale(1.08); }
+  .float svg { width: 28px; height: 28px; }
+  .float.wa { background: #25D366; }
+  .float.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 860px) {
+    .menu-btn { display: flex; }
+    nav ul {
+      position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0;
+      background: var(--espresso); max-height: 0; overflow: hidden; transition: max-height .35s ease;
+      border-bottom: 1px solid rgba(225,184,116,.25);
+    }
+    nav ul.open { max-height: 320px; }
+    nav ul li a { display: block; padding: 1rem 6vw; border-top: 1px solid rgba(255,255,255,.06); }
+    .about, .contact-wrap { grid-template-columns: 1fr; }
+    .why ul { columns: 1; }
+    form { padding: 1.5rem; }
+  }
+
+  /* ---------- MOTION ---------- */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes drift { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-40px, 30px) scale(1.08); } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes ring {
+    0%   { box-shadow: 0 8px 22px rgba(42,29,21,.35), 0 0 0 0 rgba(185,139,62,.55); }
+    70%  { box-shadow: 0 8px 22px rgba(42,29,21,.35), 0 0 0 14px rgba(185,139,62,0); }
+    100% { box-shadow: 0 8px 22px rgba(42,29,21,.35), 0 0 0 0 rgba(185,139,62,0); }
+  }
+  @keyframes shine { to { background-position: 200% center; } }
+
+  nav { transition: padding .3s ease, box-shadow .3s ease; }
+  nav.scrolled { padding: .6rem 6vw; box-shadow: 0 12px 30px -12px rgba(0,0,0,.45); }
+  nav ul a { position: relative; }
+  nav ul a::after {
+    content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px;
+    background: var(--gold-soft); border-radius: 2px; transition: width .3s ease;
+  }
+  nav ul a:hover::after { width: 100%; }
+  .logo:hover svg { transform: rotate(-8deg) scale(1.06); }
+  .logo svg { transition: transform .5s ease; }
+  .logo svg .loop { stroke-dasharray: 220; stroke-dashoffset: 220; animation: draw 2.4s ease forwards .4s; }
+
+  .hero { position: relative; overflow: hidden; }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero::before {
+    content: ""; position: absolute; width: 560px; height: 560px; right: -140px; top: 8%;
+    border-radius: 50%; background: radial-gradient(circle, rgba(233,185,160,.4), transparent 70%);
+    animation: drift 12s ease-in-out infinite; pointer-events: none;
+  }
+  .hero .eyebrow { animation: fadeUp .9s ease both .1s; }
+  .hero h1 { animation: fadeUp .9s ease both .25s; }
+  .hero > .hero-inner > p { animation: fadeUp .9s ease both .45s; }
+  .hero .btn { animation: fadeIn .9s ease both .7s; }
+  .hero .btn + .btn { animation-delay: .85s; }
+  .btn.solid { background-size: 200% auto; }
+  .btn.solid:hover { background-position: right center; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .card.visible:hover { transform: translateY(-6px); }
+  .tile.visible:hover { transform: scale(1.02); }
+  .tile img { transition: transform .8s ease; }
+  .tile:hover img { transform: scale(1.08); }
+  .float-wrap .float:hover { transform: scale(1.12) rotate(-6deg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, .hero .eyebrow, .hero h1, .hero > .hero-inner > p, .hero .btn { opacity: 1; transform: none; }
+    .logo svg .loop { stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#top" aria-label="PrettySmile Design home">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <defs>
+        <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f1d28f"/><stop offset="1" stop-color="#b98b3e"/>
+        </linearGradient>
+      </defs>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#e1b874" stroke-width="1.5"/>
+      <circle cx="32" cy="32" r="26" fill="none" stroke="#e9b9a0" stroke-width=".6" opacity=".6"/>
+      <text x="22" y="37" text-anchor="middle" font-family="Gilda Display, Georgia, serif" font-size="19" font-weight="400" fill="#f7f0e6">P</text>
+      <text x="41" y="37" text-anchor="middle" font-family="Gilda Display, Georgia, serif" font-size="19" font-weight="400" fill="#f7f0e6">S</text>
+      <path class="loop" d="M22 44 C 28 36, 36 36, 42 44 C 36 52, 28 52, 22 44 Z M42 44 C 36 36, 28 36, 22 44" fill="none" stroke="url(#gg)" stroke-width="2.2" stroke-linecap="round" transform="translate(0,-2) scale(.92) translate(3,3)"/>
+    </svg>
+    <span class="logo-text">
+      <span class="logo-name">Pretty<em>Smile</em></span>
+      <span class="logo-sub">Design</span>
+    </span>
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <p class="eyebrow">Lagos, Nigeria · Interior Design</p>
+    <h1>Designing spaces that feel <em>luxurious,</em> functional &amp; timeless.</h1>
+    <p>Give your home a new look. From residential interiors to commercial spaces, we bring your ideas to life with creativity, elegance and attention to detail.</p>
+    <a class="btn solid" href="#contact">Start your project</a>
+    <a class="btn" href="#gallery">View our work</a>
+  </div>
+</header>
+
+<section id="about">
+  <div class="about">
+    <div>
+      <p class="eyebrow">About us</p>
+      <h2>Welcome to <em>PrettySmile</em> Design, where elegance meets functionality.</h2>
+      <p style="margin-top:1.5rem">At PrettySmile Design, we create beautiful, functional, and timeless spaces tailored to your lifestyle and brand identity.</p>
+      <p>From modern residential interiors to commercial spaces, we transform ideas into reality with creativity, elegance, and attention to detail.</p>
+    </div>
+    <div class="about-img" role="img" aria-label="PrettySmile Design interior project"></div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="section-head">
+    <p class="eyebrow">What we do</p>
+    <h2>Our <em>services</em></h2>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Residential Interior Design</h3><p>Homes shaped around how you live, with warmth and considered detail.</p></div>
+    <div class="card"><h3>Commercial Interior Design</h3><p>Offices, cafés and retail spaces that carry your brand and work for your customers.</p></div>
+    <div class="card"><h3>Bespoke Furniture</h3><p>Pieces made to fit your space, your taste and your proportions.</p></div>
+    <div class="card"><h3>Home Decor Styling</h3><p>Finishing touches, lighting and styling that bring a room together.</p></div>
+    <div class="card"><h3>Space Planning</h3><p>Layouts that balance flow, function and comfort from the start.</p></div>
+    <div class="card"><h3>3D Visuals &amp; Rendering</h3><p>See your design before a single item is installed.</p></div>
+    <div class="card"><h3>Project Execution &amp; Supervision</h3><p>From concept to completion, with careful oversight at every stage.</p></div>
+    <div class="card"><h3>Renovation &amp; Exterior Design</h3><p>Refreshing existing interiors and exteriors with a new look.</p></div>
+  </div>
+</section>
+
+<section id="gallery" class="gallery">
+  <div class="section-head">
+    <p class="eyebrow">Portfolio</p>
+    <h2>Selected <em>work</em></h2>
+  </div>
+  <div class="filters" role="tablist">
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="residential">Residential</button>
+    <button class="filter" data-filter="commercial">Commercial</button>
+    <button class="filter" data-filter="furniture">Furniture</button>
+  </div>
+  <div class="gallery-grid">
+    <figure class="tile" data-cat="residential"><img src="images/project-1.jpg" alt="Modern residential living room" onerror="this.remove()"><figcaption class="tile-cap"><small>Residential</small>Modern living room</figcaption></figure>
+    <figure class="tile" data-cat="commercial"><img src="images/project-2.jpg" alt="Commercial café interior with living wall" onerror="this.remove()"><figcaption class="tile-cap"><small>Commercial</small>Café with living wall</figcaption></figure>
+    <figure class="tile" data-cat="furniture"><img src="images/project-3.jpg" alt="Bespoke bedroom furniture" onerror="this.remove()"><figcaption class="tile-cap"><small>Furniture</small>Bespoke bedroom</figcaption></figure>
+    <figure class="tile" data-cat="residential"><img src="images/project-4.jpg" alt="Lounge with built-in shelving and lighting" onerror="this.remove()"><figcaption class="tile-cap"><small>Residential</small>Lounge with lit shelving</figcaption></figure>
+    <figure class="tile" data-cat="commercial"><img src="images/project-5.jpg" alt="Office interior render" onerror="this.remove()"><figcaption class="tile-cap"><small>Commercial</small>Office interior</figcaption></figure>
+    <figure class="tile" data-cat="residential"><img src="images/project-6.jpg" alt="Styled bedroom with pendant lighting" onerror="this.remove()"><figcaption class="tile-cap"><small>Residential</small>Styled bedroom</figcaption></figure>
+  </div>
+  <p class="gallery-note">Project photos coming soon. Replace the placeholders in the images folder to showcase real work.</p>
+</section>
+
+<section id="vision" class="mvo">
+  <div class="section-head">
+    <p class="eyebrow">Who we are</p>
+    <h2>Mission, vision &amp; <em>objectives</em></h2>
+  </div>
+  <div class="mvo-grid">
+    <div>
+      <h3>Our Mission</h3>
+      <p>To create inspiring and functional interiors that combine beauty, comfort, and quality while exceeding client expectations through exceptional design and execution.</p>
+    </div>
+    <div>
+      <h3>Our Vision</h3>
+      <p>To become a leading interior design brand known for transforming spaces into elegant environments that reflect style, innovation, and excellence.</p>
+    </div>
+    <div>
+      <h3>Our Objectives</h3>
+      <ul>
+        <li>Deliver high-quality interior solutions</li>
+        <li>Create spaces that reflect personality and purpose</li>
+        <li>Maintain professionalism and excellence</li>
+        <li>Build lasting client relationships</li>
+        <li>Bring luxury and comfort into everyday living</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="section-head">
+    <p class="eyebrow">Why PrettySmile</p>
+    <h2>Why <em>choose us?</em></h2>
+  </div>
+  <ul>
+    <li>Creative &amp; modern designs</li>
+    <li>Attention to detail</li>
+    <li>Quality finishing</li>
+    <li>Professional execution</li>
+    <li>Client satisfaction priority</li>
+    <li>Functional &amp; elegant spaces</li>
+    <li>Reliable delivery process</li>
+  </ul>
+</section>
+
+<section id="contact" class="contact">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <p class="eyebrow" style="color:var(--gold)">Let's talk</p>
+      <h2 style="margin-bottom:1.5rem">Let's create your <em>dream space</em> together.</h2>
+      <p><strong>Location</strong>Lagos State, Nigeria · Available to travel</p>
+      <p><strong>WhatsApp / Phone</strong><a href="tel:+2348111937763">0811 193 7763</a></p>
+      <p><strong>Email</strong><a href="mailto:funmilayoabigail382@gmail.com">funmilayoabigail382@gmail.com</a></p>
+      <p><strong>Instagram</strong><a href="https://instagram.com/prettysmile_designn.ng" target="_blank" rel="noopener">@prettysmile_designn.ng</a></p>
+    </div>
+    <form id="inquiry">
+      <input type="text" id="name" placeholder="Your name" required>
+      <input type="text" id="phone" placeholder="Phone or WhatsApp number">
+      <select id="type">
+        <option>Residential interior design</option>
+        <option>Commercial interior design</option>
+        <option>Bespoke furniture</option>
+        <option>Home decor styling</option>
+        <option>Renovation or exterior design</option>
+        <option>Other</option>
+      </select>
+      <textarea id="message" placeholder="Tell us about your space and what you have in mind"></textarea>
+      <button class="btn solid" type="submit">Send via WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <a class="logo" href="#top" aria-label="PrettySmile Design home">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="#e1b874" stroke-width="1.5"/><text x="22" y="37" text-anchor="middle" font-family="Gilda Display, Georgia, serif" font-size="19" font-weight="400" fill="#f7f0e6">P</text><text x="41" y="37" text-anchor="middle" font-family="Gilda Display, Georgia, serif" font-size="19" font-weight="400" fill="#f7f0e6">S</text></svg>
+    <span class="logo-text"><span class="logo-name">Pretty<em>Smile</em></span><span class="logo-sub">Design</span></span>
+  </a>
+  <p>Designing spaces, enhancing lives · Lagos, Nigeria</p>
+</footer>
+
+<div class="float-wrap">
+  <a class="float wa" href="https://wa.me/2348111937763" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c0-.1-.2-.2-.4-.3z"/></svg>
+  </a>
+  <a class="float ig" href="https://instagram.com/prettysmile_designn.ng" target="_blank" rel="noopener" aria-label="Follow on Instagram">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/></svg>
+  </a>
+</div>
+
+<script>
+  // Scroll reveal
+  const revealTargets = document.querySelectorAll(".section-head, .card, .tile, .about-img, .about > div, .mvo-grid > div, .why li, .contact-info, form");
+  revealTargets.forEach((el, i) => { el.classList.add("reveal"); el.style.transitionDelay = ((i % 4) * 90) + "ms"; });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } });
+  }, { threshold: 0.15 });
+  revealTargets.forEach(el => io.observe(el));
+
+  // Nav shrink on scroll
+  const navEl = document.querySelector("nav");
+  window.addEventListener("scroll", () => navEl.classList.toggle("scrolled", window.scrollY > 40), { passive: true });
+
+  // Hamburger menu
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+  function setMenu(open) {
+    navLinks.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  menuBtn.addEventListener("click", () => setMenu(!navLinks.classList.contains("open")));
+  navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+
+  // Gallery filter
+  document.querySelectorAll(".filter").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const f = btn.dataset.filter;
+      document.querySelectorAll(".tile").forEach(t => {
+        t.classList.toggle("hide", f !== "all" && t.dataset.cat !== f);
+      });
+    });
+  });
+
+  // WhatsApp inquiry form
+  document.getElementById("inquiry").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const v = id => document.getElementById(id).value.trim();
+    const text = `Hello PrettySmile Design, I'm ${v("name")}${v("phone") ? " (" + v("phone") + ")" : ""}. Project: ${v("type")}. ${v("message")}`;
+    window.open("https://wa.me/2348111937763?text=" + encodeURIComponent(text), "_blank", "noopener");
+  });
+</script>
+</body>
+</html>
